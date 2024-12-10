@@ -1,3 +1,4 @@
+import json
 import math
 from bson import ObjectId
 import cloudinary.uploader
@@ -80,11 +81,14 @@ async def add_car_with_picture(
     km: int = Form("km"),
     price: int = Form("price"),
     picture: UploadFile = File("picture"),
-    user: str = Depends(auth_handler.auth_wrapper),
+    user_data: str = Depends(auth_handler.auth_wrapper),
 ):
     cloudinary_image = cloudinary.uploader.upload(
         picture.file, folder="FARM2", crop="fill", width=800)
     picture_url = cloudinary_image["url"]
+
+    user_data = user_data.replace("'", '"')
+    user = json.loads(user_data)
 
     car = CarModel(
         brand=brand,

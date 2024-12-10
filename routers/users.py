@@ -19,8 +19,8 @@ async def register(request: Request, newUser: LoginModel = Body(...)) -> UserMod
     newUser = newUser.model_dump()
 
     if (existing_username := await users.find_one({"username": newUser["username"]}) is not None):
-        raise HTTPException(status_code=409, detail=f"User with username {
-                            newUser['username']} already exists")
+        raise HTTPException(status_code=409,
+                            detail=f"User with username {newUser['username']} already exists")
 
     new_user = await users.insert_one(newUser)
 

@@ -4,13 +4,15 @@ from fastapi import HTTPException, Security
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from passlib.context import CryptContext
 import jwt
+from config import BaseConfig
 
 
 class AuthHandler:
     security = HTTPBearer()
+    settings = BaseConfig()
     pwd_context = CryptContext(
         schemes=["sha256_crypt"], deprecated="auto")
-    secret = "FARMSTACKsecretString"
+    secret = settings.AUTH_KEY
     algorithm_hs256 = "HS256"
 
     def get_password_hash(self, password):

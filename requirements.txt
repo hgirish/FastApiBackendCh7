@@ -1,0 +1,8 @@
+fastapi
+motor
+uvicorn
+pydantic-settings
+passlib
+pymongo
+pyjwt
+cloudinary

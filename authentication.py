@@ -12,7 +12,7 @@ class AuthHandler:
     settings = BaseConfig()
     pwd_context = CryptContext(
         schemes=["sha256_crypt"], deprecated="auto")
-    secret = settings.AUTH_KEY
+    secret = settings.AUTH_SECRET
     algorithm_hs256 = "HS256"
 
     def get_password_hash(self, password):
